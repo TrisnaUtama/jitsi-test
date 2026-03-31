@@ -1,0 +1,18 @@
+services:
+  be:
+    build: ./be-jitsi
+    container_name: jitsi-be
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file:
+      - ./be-jitsi/.env
+
+  fe:
+    build: ./jitsi-react
+    container_name: jitsi-fe
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5173:80"
+    depends_on:
+      - be
